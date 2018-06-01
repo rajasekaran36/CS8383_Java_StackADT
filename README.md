@@ -7,3 +7,5 @@ This is stack implementation in java without exception handling
 1. PUSH
 2. POP
 3. PEEK
+
+Demo : https://youtu.be/LiAwzCHH6Go
