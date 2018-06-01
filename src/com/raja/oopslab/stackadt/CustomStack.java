@@ -1,79 +1,72 @@
 package com.raja.oopslab.stackadt;
+
 public class CustomStack implements StackOperations {
 	int[] stack_array;
 	int limit;
-	int current_position = -1;
+	int current_position = 0;
 
 	public CustomStack(int limit) {
 		this.limit = limit;
 		stack_array = new int[limit];
+		initStack();
+	}
+
+	public void initStack() {
+		for (int i = 0; i < limit; i++)
+			stack_array[i] = -1;
 	}
 
 	@Override
 	public boolean push(int number) {
 
-		if (isStackFull()) {
-			System.out.println("Sorry Stack is Full ... Try to POP ");
-			return false;
-		} else {
-			current_position++;
+		try {
+
 			stack_array[current_position] = number;
+			current_position++;
 			System.out.println("The element " + number + " pushed in the position " + current_position);
+			display();
 			return true;
 		}
+
+		catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Sorry Stack Full Please do some POP's");
+		}
+		return false;
 
 	}
 
 	@Override
 	public boolean pop() {
-		if (isStackEmpty()) {
-			System.out.println("** Sorry Stack is EMPTY nothing to pop !!! **");
-			return false;
-		} else {
-			System.out.println(
-					"The element " + stack_array[current_position] + "poped from the position " + current_position);
+		int poped_element;
+		try {
+			poped_element = stack_array[current_position - 1];
+			stack_array[current_position - 1] = -1;
 			current_position--;
+			System.out.println("Poped element is : " + poped_element);
+			display();
 			return true;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Sorry Stack is Empty try to do some push");
 		}
-
+		return false;
 	}
 
 	@Override
 	public void display() {
-		if (isStackEmpty())
-			System.out.println("** Nothing to Print Stack is Empty **");
-		else {
-			System.out.println("Stack Display");
-			System.out.println("*************\n");
-			for (int i = current_position; i > -1; i--) {
-				System.out.println("   " + stack_array[i] + "   ");
-				System.out.println("------");
-			}
-		}
+
+		System.out.println("\nStack Display");
+		System.out.println("*************\n");
+		for (int i = limit - 1; i >= 0; i--)
+			if (stack_array[i] != -1)
+				System.out.println(stack_array[i]);
+		System.out.println("\n*************");
 	}
 
 	@Override
 	public void peek() {
-		if (isStackEmpty())
-			System.out.println("** Nothing to Print Stack is Empty **");
-		else
-			System.out.println("Peek Element of the Stack is " + stack_array[current_position]);
-	}
-
-	@Override
-	public boolean isStackEmpty() {
-		if (current_position == -1)
-			return true;
-		else
-			return false;
-	}
-
-	@Override
-	public boolean isStackFull() {
-		if (current_position == limit - 1)
-			return true;
-		else
-			return false;
+		int peek_element = 0;
+		peek_element = stack_array[current_position - 1];
+		System.out.println("Peek Element of the Stack is " + peek_element);
 	}
 
 }

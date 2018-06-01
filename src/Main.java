@@ -1,7 +1,8 @@
 import java.util.Scanner;
 import com.raja.oopslab.stackadt.*;
+
 public class Main {
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter the size of stack :");
 		CustomStack mystack = new CustomStack(input.nextInt());
@@ -28,7 +29,7 @@ public static void main(String[] args) {
 				System.out.println("!!! Thank You !!!");
 				break;
 			}
-			
+
 		}
 		input.close();
 		System.exit(0);
